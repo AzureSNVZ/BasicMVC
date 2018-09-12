@@ -1,7 +1,6 @@
 # ASP.NET Core (.NET Framework)
 # Build and test ASP.NET Core web applications targeting the full .NET Framework.
 # Add steps that publish symbols, save build artifacts, and more:
-# https://docs.microsoft.com/vsts/pipelines/languages/dotnet-core
 
 pool:
   vmImage: 'Hosted-Win2016'
@@ -16,7 +15,7 @@ steps:
 
 - task: NuGetCommand@2
   inputs:
-    restoreSolution: '$(solution)'
+    restoreSolution: '**/*.sln'
 
 - task: VSBuild@1
   inputs:
@@ -29,3 +28,15 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+    - task: PublishSymbols@2
+  inputs:symbolsFolder: '$(Build.SourcesDirectory)' #optional
+  searchPattern: '**/bin/**/*.pdb'
+  indexSources: true # Optional
+  symbolsArtifactName: 'Symbols_$(BuildConfiguration)' # Optional
+
+  - task: PublishBuildArtifacts@1
+  inputs:pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+  artifactName: 'drop'
+
+
