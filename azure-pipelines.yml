@@ -30,12 +30,6 @@ steps:
     configuration: '$(buildConfiguration)'
 
 
-- task: PublishSymbols@2
-  inputs:
-    symbolsFolder: '$(Build.SourcesDirectory)' #optional
-    searchPattern: '**/bin/**/*.pdb'
-    indexSources: true # Optional
-    symbolsArtifactName: 'Symbols_$(BuildConfiguration)' # Optional
 
   
 - task: PublishBuildArtifacts@1
