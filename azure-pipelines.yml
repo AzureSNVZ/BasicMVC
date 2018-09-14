@@ -31,11 +31,11 @@ steps:
 
 - task: PublishSymbols@2
   inputs:
-  searchPattern: '**/bin/**/*.pdb'
-  publishSymbols: true # Optional
-  symbolServerType: 'teamServices' # Required when publishSymbols == True# Options:  , teamServices, fileShar
-  symbolsPath: '$(Build.SourcesDirectory)'
-  symbolsArtifactName: 'Symbols_$(BuildConfiguration)'
+    searchPattern: '**/bin/**/*.pdb'
+    publishSymbols: true # Optional
+    symbolServerType: 'teamServices' # Required when publishSymbols == True# Options:  , teamServices, fileShar
+    symbolsPath: '$(Build.SourcesDirectory)'
+    symbolsArtifactName: 'Symbols_$(BuildConfiguration)'
 
   
 - task: PublishBuildArtifacts@1
